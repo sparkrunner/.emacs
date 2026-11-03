@@ -22,6 +22,7 @@
 ;; 全选 / 撤销 / 保存
 (global-set-key (kbd "C-a") 'mark-whole-buffer)
 (global-set-key (kbd "C-z") 'undo)
+(global-set-key (kbd "C-S-z") 'undo-redo)
 (global-set-key (kbd "C-s") 'save-buffer)
 
 ;; 一键编译（F9）
@@ -114,9 +115,11 @@
 ;; 隐藏工具栏
 (tool-bar-mode -1)
 
+(desktop-save-mode t)
+(setq desktop-restore-frames t)
 
 ;; ==================================================
-;; 六、自定义暗色主题（Minimal Dark）
+;; 六、自定义暗色主题（Gruber Darker 风格）
 ;; ==================================================
 ;; 安全配色工具：face 不存在时自动跳过，避免报错
 (defun my-set-face-foreground (face color)
@@ -131,20 +134,20 @@
   (when (facep face)
     (apply #'set-face-attribute face nil attrs)))
 
-;; 色板定义，修改这里即可全局同步
-(defvar my-dark-bg          "#1f1f1f")   ; 主背景
-(defvar my-dark-fg          "#c5c5c5")   ; 默认文字
-(defvar my-dark-muted       "#757575")   ; 注释/次要文字
-(defvar my-dark-cursor      "#e0c9a0")   ; 光标
-(defvar my-dark-blue        "#8ab4f8")   ; 关键字/链接
-(defvar my-dark-green       "#a8d5a2")   ; 字符串
-(defvar my-dark-gold        "#e6c88a")   ; 函数名
-(defvar my-dark-purple      "#b8a9d9")   ; 变量
-(defvar my-dark-red         "#f2a0a0")   ; 警告/常量
-(defvar my-dark-cyan        "#88c0d0")   ; 类型/内置
-(defvar my-dark-mode-bg     "#2a2a2a")   ; 活动模式行背景
-(defvar my-dark-mode-inact  "#171717")   ; 非活动模式行背景
-(defvar my-dark-highlight   "#272727")   ; 行高亮/选区底
+;; 色板定义 - Gruber Darker 风格，修改这里即可全局同步
+(defvar my-dark-bg          "#161616")   ; 主背景：深炭灰，Gruber标志性低饱和底色
+(defvar my-dark-fg          "#e4e4e4")   ; 默认文字：暖米白，低对比度不刺眼
+(defvar my-dark-muted       "#808080")   ; 注释/次要文字：中性灰，柔和不抢戏
+(defvar my-dark-cursor      "#eade9e")   ; 光标：暖黄色，和函数名同色系
+(defvar my-dark-blue        "#96a6c8")   ; 关键字/链接：灰调淡蓝，低饱和不刺眼
+(defvar my-dark-green       "#95e454")   ; 字符串：柔和嫩绿色
+(defvar my-dark-gold        "#eade9e")   ; 函数名：米黄色，Gruber经典配色
+(defvar my-dark-purple      "#cda869")   ; 变量：暖棕黄，替代原紫色更贴合风格
+(defvar my-dark-red         "#f43841")   ; 警告/常量：低饱和红
+(defvar my-dark-cyan        "#7bb6c2")   ; 类型/内置：灰调青蓝色
+(defvar my-dark-mode-bg     "#282828")   ; 活动模式行背景
+(defvar my-dark-mode-inact  "#121212")   ; 非活动模式行背景
+(defvar my-dark-highlight   "#282828")   ; 行高亮/选区底
 
 ;; 窗口全局属性
 (setq default-frame-alist
@@ -185,19 +188,19 @@
 
 ;; 选区 / 高亮 / 行号
 (my-set-face-foreground 'region "#ffffff")
-(my-set-face-background 'region my-dark-blue)
+(my-set-face-background 'region "#33415e")
 (my-set-face-background 'highlight my-dark-highlight)
 (my-set-face-background 'hl-line   my-dark-highlight)
 
 (my-set-face-background 'line-number my-dark-bg)
-(my-set-face-foreground 'line-number "#4a4a4a")
+(my-set-face-foreground 'line-number "#464646")
 (my-set-face-foreground 'line-number-current-line my-dark-cursor)
 (my-set-face-background 'line-number-current-line my-dark-highlight)
 
 ;; 括号匹配
 (my-set-face-attribute 'show-paren-match
                     :foreground "#ffffff"
-                    :background my-dark-cyan)
+                    :background "#4a4a4a")
 (my-set-face-attribute 'show-paren-mismatch
                     :foreground "#ffffff"
                     :background my-dark-red)
@@ -257,8 +260,23 @@
 ;; 七、Custom 自动生成区（请勿手动编辑）
 ;; ==================================================
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
-   [default default default italic underline success warning error]))
-(custom-set-faces)
-
+   [default default default italic underline success warning error])
+ '(blink-cursor-mode nil)
+ '(column-number-mode t)
+ '(cua-mode t)
+ '(global-display-line-numbers-mode t)
+ '(size-indication-mode t)
+ '(tab-bar-mode t)
+ '(tool-bar-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Iosevka" :foundry "nil" :slant normal :weight regular :height 120 :width normal)))))
 ```
