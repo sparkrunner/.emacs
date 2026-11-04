@@ -106,10 +106,20 @@
 (blink-cursor-mode -1)
 
 ;; 滚动优化：平滑滚动，保留上下文边距
-(setq scroll-preserve-screen-position 1)
+;; 关闭滚动时保持光标相对窗口位置
+(setq scroll-preserve-screen-position nil)
+
+;; 自动滚动时仅把光标拉到窗口边缘，不居中跳动（>100 即生效）
 (setq scroll-conservatively 101)
-(setq scroll-margin 3)
-(setq scroll-step 1)
+
+;; 关闭主动预滚动
+(setq scroll-step 0)
+(setq scroll-up-aggressively nil)
+(setq scroll-down-aggressively nil)
+
+;; 鼠标滚轮也遵循同样的滚动逻辑，不额外调整光标
+(setq mouse-wheel-scroll-amount '(3 ((shift) . 1) ((control)))
+      mouse-wheel-progressive-speed nil)
 
 ;; 系统剪贴板互通
 (setq x-select-enable-clipboard t)
