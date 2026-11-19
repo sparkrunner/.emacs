@@ -5,6 +5,7 @@
 ;; ==================================================
 ;; 1. 包管理器与国内镜像
 ;; ==================================================
+(setq package-check-signature nil) 
 (setq package-archives '(("gnu"    . "https://mirrors.zju.edu.cn/elpa/gnu/")
                          ("nongnu" . "https://mirrors.zju.edu.cn/elpa/nongnu/")
                          ("melpa"  . "https://mirrors.zju.edu.cn/elpa/melpa/")))
